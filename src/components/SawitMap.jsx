@@ -3,7 +3,7 @@ import { DeckGL } from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiZGVtb3VzZXIiLCJhIjoiY2t1eDZjbjJrMGh0ZzJ2bXN1eWZ0Y2t3ZyJ9.6OPZ0vS-Xaepu_zUqHRtOw'; // Token demo
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiZGVtb3VzZXIiLCJhIjoiY2t1eDZjbjJrMGh0ZzJ2bXN1eWZ0Y2t3ZyJ9.6OPZ0vS-Xaepu_zUqHRtOw'; // Demo token
 
 export default function SawitMap() {
   const [viewState, setViewState] = useState({
@@ -87,8 +87,6 @@ export default function SawitMap() {
         layers={[batasNagariLayer, sawitLayer]}
       >
         <Map
-          reuseMaps
-          mapLib={import('mapbox-gl')}
           mapStyle="mapbox://styles/mapbox/satellite-v9"
           mapboxAccessToken={MAPBOX_TOKEN}
         />
@@ -104,7 +102,9 @@ export default function SawitMap() {
           <div className="w-4 h-0.5 bg-blue-600"></div>
           <span>Batas Nagari</span>
         </div>
-        <div className="text-sm mb-2">Total Luas: <strong>{totalLuas.toLocaleString()} m²</strong></div>
+        <div className="text-sm mb-2">
+          Total Luas: <strong>{totalLuas.toLocaleString()} m²</strong>
+        </div>
         <button onClick={() => setShowLayer(!showLayer)} className="w-full text-sm bg-green-600 text-white px-3 py-1 rounded mb-2">
           {showLayer ? 'Sembunyikan Layer' : 'Tampilkan Layer'}
         </button>
@@ -124,4 +124,4 @@ export default function SawitMap() {
       )}
     </div>
   );
-                     }
+        }
