@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { DeckGL } from '@deck.gl/react';
-import { StaticMap } from 'react-map-gl';
 import { GeoJsonLayer } from '@deck.gl/layers';
+import Map from 'react-map-gl';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiZGVtb3VzZXIiLCJhIjoiY2t1eDZjbjJrMGh0ZzJ2bXN1eWZ0Y2t3ZyJ9.6OPZ0vS-Xaepu_zUqHRtOw'; // Token demo
 
@@ -18,7 +18,6 @@ export default function SawitMap() {
   const [showLayer, setShowLayer] = useState(true);
   const [totalLuas, setTotalLuas] = useState(0);
 
-  // Path dari folder public/
   const sawitUrl = '/shp_sawit_lb_malako.geojson';
   const batasNagariUrl = '/shp_sawit.geojson';
 
@@ -82,13 +81,16 @@ export default function SawitMap() {
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
       <DeckGL
-        initialViewState={viewState}
+        viewState={viewState}
         controller={true}
+        onViewStateChange={({ viewState }) => setViewState(viewState)}
         layers={[batasNagariLayer, sawitLayer]}
       >
-        <StaticMap
-          mapboxAccessToken={MAPBOX_TOKEN}
+        <Map
+          reuseMaps
+          mapLib={import('mapbox-gl')}
           mapStyle="mapbox://styles/mapbox/satellite-v9"
+          mapboxAccessToken={MAPBOX_TOKEN}
         />
       </DeckGL>
 
@@ -122,4 +124,4 @@ export default function SawitMap() {
       )}
     </div>
   );
-                              }
+                     }
